@@ -1,0 +1,29 @@
+<!DOCTYPE HTML>
+<html>
+    <head>
+<!--        <script src="http://cdn.socket.io/stable/socket.io.js">-->
+        </script>
+        <script type="text/javascript">
+            function WebSocketTest(){
+//                socket = new io.Socket('localhost');
+//                socket.connect();
+//                socket.send('some data');
+//                socket.on('message', function(data){
+//                    alert('got some data' + data);
+//                });
+				conn = new WebSocket("ws://localhost:8010")
+				conn.onopen = function(evt) { 
+					document.write("connected")
+				}
+				conn.onmessage = function(evt) { 
+					document.write(evt.data)
+				}
+            }
+        </script>
+    </head>
+    <body>
+        <div id="sse">
+            <a href="javascript:WebSocketTest()">Run WebSocket</a>
+        </div>
+    </body>
+</html>
