@@ -1,5 +1,6 @@
 /**
- * @author StanB
+ * @author stan229
+ * Simple socket.io test
  */
 var http = require('http') 
 var io = require('socket.io')

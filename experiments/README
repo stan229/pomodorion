@@ -1,0 +1,19 @@
+Steps to get the experiments working:
+
+1) Install node.js (current stable):
+	a) Some links of interest:
+		http://nodejs.org/#download
+		http://www.devpatch.com/2010/02/installing-node-js-on-os-x-10-6/
+2) Install Node Package Manager (npm):
+	a)	Some links of interest:
+		http://npmjs.org/
+		https://github.com/isaacs/npm/blob/master/README.md 
+3) Install the following node packages (npm install) : 
+	a)	socket.io 
+		i) https://github.com/LearnBoost/Socket.IO-node
+4) To start the socket.io example:
+	a) Navigate to source code directory
+	b) run "node socket_io.js"
+	c) In your browser connect to http://localhost:8000/
+	d) Click "Run WebSocket"
+5) To run just an http server use "node web_server.js"

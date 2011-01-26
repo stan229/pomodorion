@@ -1,3 +1,7 @@
+/**
+ * @author stan229
+ */
+// simple http server
 var sys = require('sys')
 var path = require('path')
 var fs = require('fs')
