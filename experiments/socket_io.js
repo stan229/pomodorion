@@ -26,9 +26,9 @@ server.listen(8000)
 var socket = io.listen(server);
 
 socket.on('connection', function(client){
-	
+console.dir(client)	
   // new client is here!
-  client.on('message', function(){ console.log("hello world") })
+  client.on('message', function(data){ console.log(data) })
   client.on('disconnect', function(){ console.log("disco") })
   for(var i = 0; i < 10; i++) { 
 		client.send(i)

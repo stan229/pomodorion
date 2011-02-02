@@ -4,13 +4,17 @@
         <script src="/socket.io/socket.io.js">
         </script>
         <script type="text/javascript">
-        	
+        	var client = {
+				userName: "myUser"
+			}
         	function WebSocketTest(){
-				var socket = new io.Socket('localhost');
+				var socket = new io.Socket('localhost')
+				socket.options.port = 8000
 				socket.connect();
 				socket.on('connect', function(){
 					document.write("connected")
-					
+					clienet.messageType = "connect"
+					socket.send(JSON.stringify(client))
 				})
 				socket.on('message', function(message){
 					document.write(message)
@@ -19,11 +23,15 @@
 					document.write("disconnected")
 				})
 			}
+			
+			function parseMessage(jsonString) {
+				 
+			}
+			
         </script>
     </head>
     <body>
         <div id="sse">
-        	
             <a href="javascript:WebSocketTest()">Run WebSocket</a>
         </div>
     </body>

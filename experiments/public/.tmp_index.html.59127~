@@ -10,7 +10,6 @@
 				socket.connect();
 				socket.on('connect', function(){
 					document.write("connected")
-					
 				})
 				socket.on('message', function(message){
 					document.write(message)
@@ -18,6 +17,7 @@
 				socket.on('disconnect', function(){
 					document.write("disconnected")
 				})
+				socket.send("test message")
 			}
         </script>
     </head>

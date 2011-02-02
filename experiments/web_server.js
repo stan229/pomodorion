@@ -10,7 +10,7 @@ var server = http.createServer(function(req, res){
     res.writeHead(200, {
         'Content-Type': 'text/html'
     });
-	var fileName = path.join(process.cwd(),"/public/index.html")
+	var fileName = path.join(process.cwd(),"/public/index2.html")
 	fs.readFile(fileName,"binary",function(err,file) {
 		if (err) {
 			console.log(err)
@@ -19,4 +19,4 @@ var server = http.createServer(function(req, res){
 		res.end()
 	})
 })
-server.listen(8000)
+server.listen(8001)
