@@ -4,35 +4,84 @@
         <script src="/socket.io/socket.io.js">
         </script>
         <script type="text/javascript">
-        	var client = {
-				userName: "myUser"
-			}
-        	function WebSocketTest(){
-				var socket = new io.Socket('localhost')
-				socket.options.port = 8000
-				socket.connect();
-				socket.on('connect', function(){
-					document.write("connected")
-					clienet.messageType = "connect"
-					socket.send(JSON.stringify(client))
-				})
-				socket.on('message', function(message){
-					document.write(message)
-				})
-				socket.on('disconnect', function(){
-					document.write("disconnected")
-				})
-			}
-			
-			function parseMessage(jsonString) {
-				 
-			}
-			
+            var socket;
+            var client = {
+                userName: "myUser",
+                timer: new Date(),
+                status: "idle"
+            
+            }
+            function WebSocketTest(){
+                socket = new io.Socket('localhost')
+                socket.options.port = 8000
+                socket.connect();
+                socket.on('connect', function(){
+                    client.messageType = "connect"
+                    socket.send(JSON.stringify(client))
+                })
+                socket.on('message', function(message){
+                    parseMessage(JSON.parse(message))
+                })
+                
+                socket.on('disconnect', function(){
+                    document.getElementById("pomoStatus").innerHTML = "disconnected"
+                })
+            }
+            
+            function PomoBegin(){
+                client.messageType = "pomo"
+                debug(JSON.stringify(client))
+                socket.send(JSON.stringify(client))
+            }
+            
+            function PomoBreak(){
+                client.messageType = "pomoBreak"
+                debug(JSON.stringify(client))
+                socket.send(JSON.stringify(client))
+            }
+            
+            function parseMessage(jsonString){
+				
+                for (jsonIndex in jsonString) {
+                    var json = jsonString[jsonIndex]
+                    switch (json.messageType) {
+                        case "confirmConnect":
+                            debug("Client connected with id: " + json.clientId)
+                            client = json
+                            document.getElementById("pomoStatus").innerHTML = "connected"
+                            break;
+						case "pomo":
+							break;
+						case "pomoBreak":
+							break;	
+                        default:
+                            //                        document.getElementById("pomoDebug").innerHTML = json;
+                            debug(JSON.stringify(json))
+                            
+                    }
+                }
+                
+            }
+            
+            function debug(message){
+                document.getElementById("pomoDebug").innerHTML = message;
+                
+            }
         </script>
     </head>
     <body>
         <div id="sse">
             <a href="javascript:WebSocketTest()">Run WebSocket</a>
+            <a href="javascript:PomoBegin()">Begin</a>
+            <a href="javascript:PomoBreak()">End</a>
+            <div id="pomo">
+                <textarea id="pomoStatus">
+                </textarea>
+                <textarea rows="5" id="pomoClients">
+                </textarea>
+                <textarea rows="7" id="pomoDebug">
+                </textarea>
+            </div>
         </div>
     </body>
 </html>
